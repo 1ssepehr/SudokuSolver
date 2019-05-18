@@ -6,39 +6,31 @@ public class Runner {
 	public static void main(String[] args) {
 		Puzzle puzzle = new Puzzle();
 		String puzzlePath = new File("").getAbsolutePath();
-		puzzlePath = puzzlePath.concat("\\src\\Easy.txt");
+		puzzlePath = puzzlePath.concat("\\src\\Hard.txt");
 		File PuzzleFile = new File(puzzlePath);
 		try {
-			Scanner nextIteration = new Scanner(System.in);
 			Scanner PuzzleReader = new Scanner(PuzzleFile);
-			for (int i = 0; i < 9; i++) {
-				for (int j = 0; j < 9; j++) {
+			for (int i = 0; i < 9; i++)
+				for (int j = 0; j < 9; j++)
 					puzzle.board[i][j].value = PuzzleReader.nextInt();
-				}
-			}
-
 			System.out.println("INITIAL PUZZLE");
-			int attempt = 0;
 			puzzle.display();
+			System.out.println("PROCESSING...");
+			long startTime = System.nanoTime();
 			while(!puzzle.isComplete()) {
-				puzzle.updateBlacklist();
-				puzzle.refillWithBlacklist();
-
-				if (puzzle.hasTheBoardChanged) {
-					attempt++;
-					System.out.println("ATTEMPT " + attempt);
+				puzzle.iterate();
+				if (!puzzle.hasTheBoardChanged) {
 					puzzle.display();
-				} else {
-					System.out.println("STUCK");
+					System.out.println("STUCK :(");
 					System.exit(0);
 				}
 			}
-			System.out.println("PUZZLE SOLVED.");
+			long endTime = System.nanoTime();
+			long duration = (endTime - startTime);
+			int ms = (int) (duration / 1000000);
+			puzzle.display();
+			System.out.println("PUZZLE SOLVED IN " + ms + "ms.");
 			PuzzleReader.close();
-			nextIteration.close();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		} catch (FileNotFoundException e) { e.printStackTrace(); }
 	}
 }
