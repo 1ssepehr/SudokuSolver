@@ -8,4 +8,3 @@
 0 0 0 0 7 9 0 5 0
 0 0 5 4 0 0 0 0 6
 Puzzle #9519362810
-Taken from www.websudoku.com

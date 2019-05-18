@@ -8,4 +8,3 @@
 4 2 0 0 6 1 0 7 0
 0 3 0 0 0 2 8 0 6
 Puzzle #3798500966
-Taken from www.websudoku.com
