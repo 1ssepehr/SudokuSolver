@@ -39,7 +39,6 @@ class PuzzleGrabber {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				int linearLocation = 9 * i + j;
-				System.out.println(linearLocation);
 				if ((int) (puzzleHideOrShow.charAt(linearLocation)) - (int) ('0') == 0) {
 					puzzle[i][j] = (int) puzzleAllValues.charAt(linearLocation) - (int) ('0');
 				} else {
