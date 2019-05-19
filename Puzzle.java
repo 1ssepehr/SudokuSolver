@@ -1,14 +1,15 @@
 class Puzzle {
-	Square[][] board;
+	private Square[][] board;
 	boolean hasTheBoardChanged;
 
-	Puzzle() {
+	Puzzle(int[][] valueMatrix) {
 		hasTheBoardChanged = false;
 		board = new Square[9][9];
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				board[i][j] = new Square();
+				board[i][j].value = valueMatrix[i][j];
 				if (i < 3 && j < 3) board[i][j].subGrid = subGrid.A;
 				if (i < 3 && j >= 3 && j < 6) board[i][j].subGrid = subGrid.B;
 				if (i < 3 && j >= 6) board[i][j].subGrid = subGrid.C;
