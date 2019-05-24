@@ -1,18 +1,39 @@
 import java.util.Scanner;
 public class Runner {
 
+	/**
+	 * The main function that runs the Sudoku Solver.
+	 */
 	public static void main(String[] args) {
 		Scanner Console = new Scanner(System.in);
-		System.out.print("Give the puzzle ID: ");
-		String puzzleID = Console.nextLine();
-		System.out.print("Give the difficulty (easy = 1, medium = 2, hard = 3, evil = 4): ");
-		String puzzleLevel = Console.nextLine();
+		PuzzleSolver puzzle = null;
 
-		Puzzle puzzle = new Puzzle(PuzzleGrabber.get(puzzleID, puzzleLevel));
+		System.out.println("How would you want the puzzle? \n" +
+							"1. Get from the Internet (www.websudoku.com) \n" +
+							"2. Read from the offline file");
+		int decision = (Console.nextLine().charAt(0) - '0');
+		switch (decision) {
+			case 1:
+				System.out.print("Give the WebSudoku's PuzzleSolver ID: ");
+				String puzzleID = Console.nextLine();
+				System.out.print("Give the difficulty of that puzzle (easy = 1, medium = 2, hard = 3, evil = 4): ");
+				String puzzleLevel = Console.nextLine();
+				System.out.println("\nAccessing the puzzle...\n");
+				puzzle = new PuzzleSolver(PuzzleGrabber.getFromInternet(puzzleID, puzzleLevel));
+				break;
+			case 2:
+				System.out.println("\nAccessing a random puzzle...\n");
+				puzzle = new PuzzleSolver(PuzzleGrabber.getFromFile());
+				break;
+			default:
+				System.out.println("Not a valid answer. The program will close now.");
+				System.exit(0);
+				break;
+		}
 
-		System.out.println("INITIAL PUZZLE");
+		System.out.println("Initial PuzzleSolver");
 		puzzle.display();
-		System.out.println("PROCESSING...");
+		System.out.println("Processing...");
 
 		long startTime = System.nanoTime();
 
@@ -20,7 +41,7 @@ public class Runner {
 			puzzle.iterate();
 			if (!puzzle.hasTheBoardChanged) {
 				puzzle.display();
-				System.out.println("STUCK :(");
+				System.out.println("Stuck :(");
 				System.exit(0);
 			}
 		}
@@ -30,6 +51,6 @@ public class Runner {
 		int ms = (int) (duration / 1000000);
 
 		puzzle.display();
-		System.out.println("PUZZLE SOLVED IN " + ms + "ms.");
+		System.out.println("PuzzleSolver solved in " + ms + "ms.");
 	}
 }
