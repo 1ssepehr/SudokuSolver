@@ -1,3 +1,3 @@
-public enum subGrid {
+public enum Subgrid {
 	A, B, C, D, E, F, G, H, I
 }
