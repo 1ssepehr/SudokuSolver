@@ -1,11 +1,22 @@
+/**
+ * A class to represent squares of a sudoku puzzle
+ */
 class Square {
 	int value;
+	/**
+	 * The blacklist is the boolean list of the numbers that a square
+	 * cannot be, based on other relative values in the puzzle
+	 */
 	boolean[] blacklist;
-	subGrid subGrid;
+	Subgrid subgrid;
 
 	Square() {
+		this(0);
+	}
+
+	Square(int value) {
 		blacklist = new boolean[] {true, false, false, false, false, false, false, false, false, false};
-		this.value = 0;
+		this.value = value;
 	}
 
 	boolean isEmpty() {
