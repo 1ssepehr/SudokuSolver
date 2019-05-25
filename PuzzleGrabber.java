@@ -71,7 +71,7 @@ class PuzzleGrabber {
 		Square[][] puzzle = new Square[9][9];
 		String filePath = new File("").getAbsolutePath();
 		try {
-			File database_file = new File(filePath + "/sudoku-database.txt");
+			File database_file = new File(filePath + "/src/sudoku-database.txt");
 			Scanner reader;
 			try {
 				reader = new Scanner(database_file);
